@@ -19,3 +19,16 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/codeStyles/Project.xml
+.idea/libraries/Dart_Packages.xml
+.idea/libraries/Dart_SDK.xml
+.idea/libraries/Flutter_for_Android.xml
+.idea/libraries/Flutter_Plugins.xml
+.idea/libraries/KotlinJavaRuntime.xml
+.idea/runConfigurations/main_dart.xml
+.metadata
+dreader.iml
