@@ -235,8 +235,7 @@ class CommonUtils {
 
   static copy(String data, BuildContext context) {
     Clipboard.setData(new ClipboardData(text: data));
-    Fluttertoast.showToast(
-        msg: "拷贝成功");
+    Fluttertoast.showToast(msg: "拷贝成功");
   }
 
   static void launchWebView(BuildContext context, String title, String url) {
@@ -263,15 +262,50 @@ class CommonUtils {
     }
   }
 
+  static Size screenSize(BuildContext context) {
+    MediaQueryData data = MediaQuery.of(context);
+    //屏幕大小
+    Size mSize = data.size;
+    return mSize;
+  }
+
+  ///屏幕宽度
+  /// 上下边距 （主要用于 刘海  和  内置导航键）
+  ///    double topPadding = MediaQuery.of(context).padding.top;
+  ///    double bottomPadding = MediaQuery.of(context).padding.bottom;
+  ///————————————————
+  static double screenWidth(BuildContext context) {
+    MediaQueryData data = MediaQuery.of(context);
+    //屏幕大小
+    Size mSize = data.size;
+    //密度
+    double mRatio = data.devicePixelRatio;
+    //设备像素
+    double width = mSize.width * mRatio;
+    return width;
+  }
+
+  ///屏幕高度
+  static double screenHeight(BuildContext context) {
+    MediaQueryData data = MediaQuery.of(context);
+    //屏幕大小
+    Size mSize = data.size;
+    //密度
+    double mRatio = data.devicePixelRatio;
+    //设备像素
+    double height = mSize.height * mRatio;
+    return height;
+  }
+
   ///列表item dialog
   static Future<Null> showCommitOptionDialog(
-      BuildContext context,
-      List<String> commitMaps,
-      ValueChanged<int> onTap, {
-        width = 250.0,
-        height = 400.0,
-        List<Color> colorList,
-      }) {
+    BuildContext context,
+    List<String> commitMaps,
+    ValueChanged<int> onTap, {
+    width = 250.0,
+    height = 400.0,
+    List<Color> colorList,
+  }) {
     return _showGSYDialog(
         context: context,
         builder: (BuildContext context) {
@@ -347,19 +381,21 @@ class CommonUtils {
 
   ///版本更新
   static Future<Null> showUpdateDialog(
-      BuildContext context, String contentMsg,String updateUrl) {
+      BuildContext context, String contentMsg, String updateUrl) {
     return _showGSYDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: new Text(DReaderLocalizations.i18n(context).app_version_title),
+            title:
+                new Text(DReaderLocalizations.i18n(context).app_version_title),
             content: new Text(contentMsg),
             actions: <Widget>[
               new FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: new Text(DReaderLocalizations.i18n(context).app_cancel)),
+                  child:
+                      new Text(DReaderLocalizations.i18n(context).app_cancel)),
               new FlatButton(
                   onPressed: () {
                     launch(updateUrl);
@@ -383,7 +419,7 @@ class CommonUtils {
         builder: (context) {
           return MediaQuery(
 
-            ///不受系统字体缩放影响
+              ///不受系统字体缩放影响
               data: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
                   .copyWith(textScaleFactor: 1),
               child: new SafeArea(child: builder(context)));

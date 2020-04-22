@@ -62,7 +62,7 @@ class _ErrorPageState extends State<ErrorPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               new Image(
-                  image: new AssetImage(GSYICons.DEFAULT_USER_ICON),
+                  image: new AssetImage(DReaderICons.DEFAULT_USER_ICON),
                   width: 90.0,
                   height: 90.0),
               new SizedBox(

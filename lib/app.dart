@@ -54,7 +54,7 @@ class _DReaderState extends State<DReaderApp> {
               return SplashPage();
             },
             HomePage.sName: (context) {
-              return NavigatorUtils.pageContainer(HomePage());
+              return HomePage();
             },
           },
           initialRoute: SplashPage.sName,
