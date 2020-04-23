@@ -1,6 +1,5 @@
 import 'package:dreader/common/style/d_reader_style.dart';
 import 'package:dreader/common/utils/navigator_utils.dart';
-import 'package:dreader/page/home/book_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -61,6 +60,10 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
   ///当前选中的tab
   var _currentTabIndex = 0;
 
+  var _currentTapIndex = -1;
+
+  var _cacheCurrentTapIndex = -1;
+
   @override
   void initState() {
     print("initState");
@@ -81,6 +84,13 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
     print(_currentTabIndex);
   }
 
+  _changeTapIndex(index){
+    setState(() {
+      _currentTapIndex = index;
+    });
+    print(_currentTapIndex);
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -95,7 +105,9 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          BookPage(),
+          Center(
+            child: Text("sss"),
+          ),
           ListView(),
           ListView(),
           ListView(),
@@ -110,32 +122,43 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
                   style: BorderStyle.solid,
                   color: DReaderColors.subTextColor)),
         ),
-        /// 底部菜单栏
         child: SafeArea(
           child: TabBar(
-            onTap: (index){
-              print("=>$index");
-            },
             controller: _tabController,
             tabs: tabs
-                .map((item) => Column(
-              children: <Widget>[
-                Image.asset(
-                  item[_currentTabIndex == tabs.indexOf(item)
-                      ? "icon_p"
-                      : "icon_n"],
-                  height: 35,
-                ),
-                Text(
-                  item["tab"],
-                  style: TextStyle(
-                      fontSize: 10,
-                      color: _currentTabIndex == tabs.indexOf(item)
-                          ? DReaderColors.mainThemeColor
-                          : Colors.black54),
-                )
-              ],
-            ))
+                .map((item) => GestureDetector(
+                      onTapDown: (detail) {
+                        print("onTapDown");
+                        _cacheCurrentTapIndex = tabs.indexOf(item);
+                        _changeTapIndex(_cacheCurrentTapIndex);
+                      },
+                      onTap: () {
+                        _changeTabIndex(_cacheCurrentTapIndex);
+                      },
+                      onTapCancel: () {
+                        _changeTapIndex(_currentTabIndex);
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            item[_currentTabIndex == tabs.indexOf(item) ||
+                                    tabs.indexOf(item) == _currentTapIndex
+                                ? "icon_p"
+                                : "icon_n"],
+                            height: 35,
+                          ),
+                          Text(
+                            item["tab"],
+                            style: TextStyle(
+                                fontSize: 10,
+                                color: _currentTabIndex == tabs.indexOf(item) ||
+                                        tabs.indexOf(item) == _currentTapIndex
+                                    ? Color.fromARGB(255, 253, 150, 40)
+                                    : Colors.black54),
+                          )
+                        ],
+                      ),
+                    ))
                 .toList(),
             indicatorColor: DReaderColors.white,
           ),

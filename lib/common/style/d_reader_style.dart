@@ -43,6 +43,8 @@ class DReaderColors {
 
   static const Color mainTextColor = primaryDarkValue;
   static const Color textColorWhite = white;
+
+  static const Color mainThemeColor = Color.fromARGB(255, 253, 150, 40);
 }
 
 ///文本样式
@@ -52,6 +54,7 @@ class DReaderConstant {
 
   static const lagerTextSize = 30.0;
   static const bigTextSize = 23.0;
+  static const textSize_20 = 20.0;
   static const normalTextSize = 18.0;
   static const middleTextWhiteSize = 16.0;
   static const smallTextSize = 14.0;
