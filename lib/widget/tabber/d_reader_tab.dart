@@ -21,7 +21,6 @@ class DReaderTab extends StatefulWidget {
 }
 
 class DReaderTabState extends State<DReaderTab> {
-
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -30,8 +29,8 @@ class DReaderTabState extends State<DReaderTab> {
           color: widget.isCurrentTab ? Colors.black : Colors.black87,
           fontWeight: widget.isCurrentTab ? FontWeight.w500 : FontWeight.normal,
           fontSize: widget.isCurrentTab
-              ? DReaderTabInheritedWidget.of(context).size ?? DReaderConstant.textSize_20
-              : DReaderTabInheritedWidget.of(context).defaultSize ?? DReaderConstant.middleTextWhiteSize),
+              ? DReaderTabInheritedWidget.of(context).size
+              : DReaderTabInheritedWidget.of(context).defaultSize),
     );
   }
 }
@@ -44,9 +43,12 @@ class DReaderTabInheritedWidget extends InheritedWidget {
   DReaderTabInheritedWidget(
       {Key key,
       @required this.child,
-      this.size = DReaderConstant.textSize_20,
-      this.defaultSize = DReaderConstant.middleTextWhiteSize})
-      : super(key: key, child: child);
+      @required this.size,
+      @required this.defaultSize})
+      : assert(size != null),
+        assert(defaultSize != null),
+        assert(child != null),
+        super(key: key, child: child);
 
   static DReaderTabInheritedWidget of(BuildContext context) {
     return context
