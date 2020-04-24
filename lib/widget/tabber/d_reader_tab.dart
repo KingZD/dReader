@@ -7,44 +7,55 @@ import 'package:flutter/material.dart';
  * Date: 2020/4/24 0:14
  * Description:
  */
-class DReaderTab extends StatefulWidget{
-
+class DReaderTab extends StatefulWidget {
   final bool isCurrentTab;
   final String text;
 
-  const DReaderTab({Key key, @required this.isCurrentTab, @required this.text}) : super(key: key);
+  const DReaderTab({Key key, @required this.isCurrentTab, @required this.text})
+      : super(key: key);
 
   @override
   DReaderTabState createState() {
-    // TODO: implement createState
     return DReaderTabState();
   }
 }
 
-class DReaderTabState extends State<DReaderTab>{
-  double _defaultSize = DReaderConstant.middleTextWhiteSize;
-  double _size = DReaderConstant.textSize_20;
-
-  void changeSize(size){
-    setState(() {
-      _size = size;
-      print("$_size");
-    });
-  }
+class DReaderTabState extends State<DReaderTab> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Text(
       widget.text,
       style: TextStyle(
           color: widget.isCurrentTab ? Colors.black : Colors.black87,
-          fontWeight:
-          widget.isCurrentTab ? FontWeight.w600 : FontWeight.normal,
+          fontWeight: widget.isCurrentTab ? FontWeight.w500 : FontWeight.normal,
           fontSize: widget.isCurrentTab
-              ? _size
-              : _defaultSize
-      ),
+              ? DReaderTabInheritedWidget.of(context).size ?? DReaderConstant.textSize_20
+              : DReaderTabInheritedWidget.of(context).defaultSize ?? DReaderConstant.middleTextWhiteSize),
     );
+  }
+}
+
+class DReaderTabInheritedWidget extends InheritedWidget {
+  final Widget child;
+  final double size;
+  final double defaultSize;
+
+  DReaderTabInheritedWidget(
+      {Key key,
+      @required this.child,
+      this.size = DReaderConstant.textSize_20,
+      this.defaultSize = DReaderConstant.middleTextWhiteSize})
+      : super(key: key, child: child);
+
+  static DReaderTabInheritedWidget of(BuildContext context) {
+    return context
+        .getElementForInheritedWidgetOfExactType<DReaderTabInheritedWidget>()
+        .widget;
+  }
+
+  @override
+  bool updateShouldNotify(DReaderTabInheritedWidget oldWidget) {
+    return oldWidget.size != size;
   }
 }
