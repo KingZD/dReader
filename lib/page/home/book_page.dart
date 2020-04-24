@@ -212,7 +212,6 @@ class _HomePage extends State<BookPage> with TickerProviderStateMixin {
 
     ///从最小的第一个开始
     int start = min(_mCacheTabIndex, _mTabIndex);
-//    print("$_mCacheTabIndex - $_mTabIndex - ${countTab.abs()} = $start");
     for (var i = start; i <= start + countTab.abs(); i++) {
       if (countTab.abs() == 0) continue;
 
@@ -227,22 +226,6 @@ class _HomePage extends State<BookPage> with TickerProviderStateMixin {
 
       ///计算多个tab 阶梯行执行动画的时间
       var mMilliseconds = 0;
-//      if (_mTabIndex > _mCacheTabIndex) {
-//        final count = start + countTab.abs() + 1 - i;
-//
-//        ///往右点击按钮
-//        mUpperBound =
-//            _mLowerBound + (mDiffUpperLowerHeight / count).ceilToDouble();
-//        mMilliseconds = (time / count).floor();
-//      } else {
-//        final count = ((i + 1) - start).abs();
-//
-//        ///往左点击按钮
-//        mUpperBound =
-//            _mLowerBound + (mDiffUpperLowerHeight / count).ceilToDouble();
-//        mMilliseconds = (time / count).floor();
-//      }
-
       switch (_mScrollDirect) {
         case ScrollDirect.LEFT:
           final count = ((i + 1) - start).abs();
@@ -333,8 +316,9 @@ class _HomePage extends State<BookPage> with TickerProviderStateMixin {
 
     ///缓存当前tab下表
     _mCacheTabIndex = _mTabIndex;
-    //如果手动滑动到顶端 或者 手动滑动到尾部 在点击tab，
-    // 由于位移距离相等 不会触发滚动监听，导致tabScroll状态无法刷新，控件触摸事件被抢占
+
+    /// 如果手动滑动到顶端 或者 手动滑动到尾部 在点击tab，
+    /// 由于位移距离相等 不会触发滚动监听，导致tabScroll状态无法刷新，控件触摸事件被抢占
     if (_mScrollWidth == 0 || _mScrollWidth == _scrollController.offset)
       _refreshTapScroll();
   }
@@ -377,9 +361,11 @@ class _HomePage extends State<BookPage> with TickerProviderStateMixin {
                             if (index == _mTabIndex) return;
                             print("单击");
                             _mTapScroll = true;
-//                          rootContext.size.width
-//                          rootContext.findRenderObject().semanticBounds.width
-//                          rootContext.findRenderObject().paintBounds.width
+
+                            ///获取组件大小
+                            ///rootContext.size.width
+                            ///rootContext.findRenderObject().semanticBounds.width
+                            ///rootContext.findRenderObject().paintBounds.width
                             ///得到父容器占用屏幕宽度
                             final mRootViewWidth = rootContext.size.width;
 
