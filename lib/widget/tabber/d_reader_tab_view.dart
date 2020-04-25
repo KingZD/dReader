@@ -29,6 +29,9 @@ enum ScrollDirect {
  * Description: 书城
  */
 class DReaderTabView extends StatefulWidget {
+
+  const DReaderTabView({Key key}) : super(key: key);
+
   @override
   _DReaderTabView createState() {
     return _DReaderTabView();
@@ -36,7 +39,7 @@ class DReaderTabView extends StatefulWidget {
 }
 
 class _DReaderTabView extends State<DReaderTabView>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin,AutomaticKeepAliveClientMixin{
   ///默认的tab宽度
   final _mDefaultTabWidth = 50.0;
 
@@ -89,7 +92,8 @@ class _DReaderTabView extends State<DReaderTabView>
 
   @override
   void initState() {
-    // TODO: implement initState
+    print("_mTabIndex:$_mTabIndex");
+    print("_mTabIndex:$_mScrollWidth");
     super.initState();
     final initLinePosition = (_mDefaultTabWidth - _mDefaultTabLineWidth) / 2;
 
@@ -415,6 +419,7 @@ class _DReaderTabView extends State<DReaderTabView>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
@@ -442,6 +447,10 @@ class _DReaderTabView extends State<DReaderTabView>
       ],
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 ///将tabview 提取出来进行状态管理，

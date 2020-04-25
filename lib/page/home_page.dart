@@ -1,6 +1,7 @@
 import 'package:dreader/common/style/d_reader_style.dart';
 import 'package:dreader/common/utils/navigator_utils.dart';
 import 'package:dreader/page/home/book_page.dart';
+import 'package:dreader/widget/fixed_tab_bar_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -57,19 +58,19 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
 
   ///tab 控制器
   TabController _tabController;
+  PageController _pageController = new PageController();
 
   ///当前选中的tab
   var _currentTabIndex = 0;
 
   @override
   void initState() {
-    print("initState");
     // TODO: implement initState
     super.initState();
     _tabController = TabController(length: tabs.length, vsync: this);
     _tabController.addListener(() {
       if (_tabController.index == _tabController.animation.value) {
-        _changeTabIndex(_tabController.index);
+//        _changeTabIndex(_tabController.index);
       }
     });
   }
@@ -92,8 +93,9 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: TabBarView(
-        controller: _tabController,
+      body: FixedTabBarView(
+        tabController: _tabController,
+        pageController: _pageController,
         children: <Widget>[
           BookPage(),
           ListView(),
@@ -114,6 +116,8 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
         child: SafeArea(
           child: TabBar(
             onTap: (index){
+//              _changeTabIndex(index);
+              _pageController.jumpToPage(index);
               print("=>$index");
             },
             controller: _tabController,
