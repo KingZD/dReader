@@ -1,10 +1,8 @@
 import 'package:dreader/common/style/d_reader_style.dart';
 import 'package:dreader/common/utils/navigator_utils.dart';
 import 'package:dreader/page/home/book_page.dart';
-import 'package:dreader/widget/fixed_tab_bar_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 class HomePage extends StatelessWidget {
   static String sName = "HomePage";
@@ -56,26 +54,15 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
     }
   ];
 
-  ///tab 控制器
-  TabController _tabController;
-  PageController _pageController = new PageController();
-
   ///当前选中的tab
   var _currentTabIndex = 0;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _tabController = TabController(length: tabs.length, vsync: this);
-    _tabController.addListener(() {
-      if (_tabController.index == _tabController.animation.value) {
-//        _changeTabIndex(_tabController.index);
-      }
-    });
   }
 
-  _changeTabIndex(index){
+  _changeTabIndex(index) {
     setState(() {
       _currentTabIndex = index;
     });
@@ -84,18 +71,14 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
-    _tabController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-      body: FixedTabBarView(
-        tabController: _tabController,
-        pageController: _pageController,
+      body: IndexedStack(
+        index: _currentTabIndex,
         children: <Widget>[
           BookPage(),
           ListView(),
@@ -103,48 +86,34 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
           ListView(),
         ],
       ),
-      bottomNavigationBar: Container(
-        height: 50,
-        decoration: BoxDecoration(
-          border: Border(
-              top: BorderSide(
-                  width: 0.0,
-                  style: BorderStyle.solid,
-                  color: DReaderColors.subTextColor)),
-        ),
-        /// 底部菜单栏
-        child: SafeArea(
-          child: TabBar(
-            onTap: (index){
-//              _changeTabIndex(index);
-              _pageController.jumpToPage(index);
-              print("=>$index");
-            },
-            controller: _tabController,
-            tabs: tabs
-                .map((item) => Column(
-              children: <Widget>[
-                Image.asset(
-                  item[_currentTabIndex == tabs.indexOf(item)
-                      ? "icon_p"
-                      : "icon_n"],
-                  height: 35,
-                ),
-                Text(
-                  item["tab"],
-                  style: TextStyle(
-                      fontSize: 10,
-                      color: _currentTabIndex == tabs.indexOf(item)
-                          ? DReaderColors.mainThemeColor
-                          : Colors.black54),
-                )
-              ],
-            ))
-                .toList(),
-            indicatorColor: DReaderColors.white,
-          ),
-        ),
+      bottomNavigationBar: CupertinoTabBar(
+        backgroundColor: Colors.transparent,
+        inactiveColor: Colors.black54,
+        activeColor: DReaderColors.mainThemeColor,
+        currentIndex: _currentTabIndex,
+        onTap: (index) {
+          setState(() {
+            _changeTabIndex(index);
+          });
+        },
+        items: tabs
+            .map((item) => BottomNavigationBarItem(
+                icon: getTabIcon(tabs.indexOf(item)), title: getTabTxt(tabs.indexOf(item))))
+            .toList(),
       ),
+    );
+  }
+
+  Image getTabIcon(int index) {
+    return Image.asset(
+      tabs[index][_currentTabIndex == index ? "icon_p" : "icon_n"],
+      height: 35,
+    );
+  }
+
+  Text getTabTxt(int index) {
+    return Text(
+      tabs[index]["tab"],
     );
   }
 }

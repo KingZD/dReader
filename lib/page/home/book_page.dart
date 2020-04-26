@@ -30,7 +30,8 @@ class BookPage extends StatefulWidget {
   }
 }
 
-class _HomePage extends State<BookPage> with TickerProviderStateMixin,AutomaticKeepAliveClientMixin {
+class _HomePage extends State<BookPage>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final _title = [
     "精选",
     "男生",
@@ -72,11 +73,8 @@ class _HomePage extends State<BookPage> with TickerProviderStateMixin,AutomaticK
             children: <Widget>[
               ///避免布局被吃掉 屏幕显示pixel 错误提示
               DReaderTabViewInheritedWidget(
-                key: UniqueKey(),
                 tabs: _title,
-                child: DReaderTabView(
-                  key: UniqueKey(),
-                ),
+                child: DReaderTabView(),
               ),
               DReaderSearchWidget(),
               DReaderMenuWidget(menus: _menu),
