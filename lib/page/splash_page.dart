@@ -9,21 +9,11 @@ class SplashPage extends StatefulWidget {
 
   @override
   _SPlashPage createState() {
-    // TODO: implement createState
     return _SPlashPage();
   }
 }
 
 class _SPlashPage extends State<SplashPage> {
-
-  List<Widget> children;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    children = _getGuideWidget();
-  }
 
   List<Widget> _getGuideWidget() {
     return [
@@ -68,7 +58,7 @@ class _SPlashPage extends State<SplashPage> {
         decoration: BoxDecoration(
           color: DReaderColors.cardWhite,
         ),
-        child: WelcomeGuide(children: children),
+        child: WelcomeGuide(children: _getGuideWidget()),
       ),
     );
   }

@@ -16,7 +16,6 @@ import 'package:redux/redux.dart';
 class DReaderApp extends StatefulWidget {
   @override
   _DReaderState createState() {
-    // TODO: implement createState
     return _DReaderState();
   }
 }
@@ -34,7 +33,6 @@ class _DReaderState extends State<DReaderApp> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return StoreProvider(
       store: store,
       child: new StoreBuilder<DReaderState>(builder: (context, store) {

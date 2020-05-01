@@ -121,7 +121,6 @@ class _DReaderTabView extends State<DReaderTabView>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _scrollController.dispose();
     _animationControllers?.values?.forEach((controller) {

@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dreader/model/book_shop_menu.dart';
 import 'package:dreader/widget/bookshop/d_reader_flex_menu_horizontal.dart';
+import 'package:dreader/widget/d_imge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,6 @@ class DReaderMenuWidget extends StatefulWidget {
 
   @override
   _DReaderMenuWidgetState createState() {
-    // TODO: implement createState
     return _DReaderMenuWidgetState();
   }
 }
@@ -29,20 +28,17 @@ class _DReaderMenuWidgetState extends State<DReaderMenuWidget> {
   var _mWidth = 0.0;
   final _mIitWidth = 0.0;
 
-  EdgeInsets edgeInsets = EdgeInsets.fromLTRB(0, 10, 0, 0);
 
   @override
   void initState() {
     super.initState();
-    edgeInsets = widget.edgeInsets ?? edgeInsets;
     WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) =>
-        {if (_mWidth == _mIitWidth) _refreshWidth(edgeInsets)});
+        {if (_mWidth == _mIitWidth) _refreshWidth()});
   }
 
   ///平均得到子child的宽度
-  void _refreshWidth(EdgeInsets edgeInsets) {
+  void _refreshWidth() {
     final width = ((context.size.width -
-                (edgeInsets.right + edgeInsets.left) -
                 widget.widgetSpace * widget.menus.length +
                 1) /
             widget.menus.length)
@@ -55,43 +51,37 @@ class _DReaderMenuWidgetState extends State<DReaderMenuWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: edgeInsets,
-      child: DReaderFlexMenuWidget(
+    return DReaderFlexMenuWidget(
         children: widget.menus
             .map((item) => Column(
                   children: <Widget>[
                     (item.icon.startsWith("http")
-                        ? CachedNetworkImage(
+                        ? DImage(
                             width: _mWidth,
+                            height: 120,
                             imageUrl: item.icon,
-                            placeholder: (context, url) => Image.asset(
-                              "static/img/general__shared__book_category_book_shadow.9.png",
-                              width: _mWidth,
-                            ),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
                           )
                         : Image.asset(
                             item.icon,
                             width: 30,
                             height: 30,
                           )),
-                    Container(
-                      alignment: Alignment.center,
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
                       width: _mWidth,
-                      padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: Text(
                         item.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(),
+                        textAlign: TextAlign.center,
                       ),
                     )
                   ],
                 ))
             .toList(),
-      ),
-    );
+      );
   }
 }

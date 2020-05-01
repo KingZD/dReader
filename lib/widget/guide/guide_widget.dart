@@ -16,7 +16,6 @@ class WelcomeGuide extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _WelcomeGuide();
   }
 }
@@ -26,7 +25,6 @@ class _WelcomeGuide extends State<WelcomeGuide> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _pageController.addListener(() {
       // todo 做一些动画属性
@@ -36,7 +34,6 @@ class _WelcomeGuide extends State<WelcomeGuide> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _pageController.dispose();
   }
@@ -51,7 +48,6 @@ class _WelcomeGuide extends State<WelcomeGuide> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _welcomeGuide();
   }
 }

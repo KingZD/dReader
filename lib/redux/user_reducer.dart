@@ -44,7 +44,6 @@ class UserInfoMiddleware extends MiddlewareClass<DReaderState> {
 class UserInfoEpic implements EpicClass<DReaderState> {
   @override
   Stream call(Stream actions, EpicStore<DReaderState> store) {
-    // TODO: implement call
     return Stream.value(actions)
         .whereType<FetchUserAction>()
         .switchMap((mapper) => _loadUserInfo());

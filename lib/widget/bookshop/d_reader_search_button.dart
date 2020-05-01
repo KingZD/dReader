@@ -26,7 +26,6 @@ class DReaderSearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
       height: height ?? 35,
