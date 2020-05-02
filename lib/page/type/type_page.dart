@@ -283,7 +283,7 @@ class _TypePage extends State<TypePage> {
     return SafeArea(
       child: Container(
         color: Colors.white,
-        padding: EdgeInsets.only(top: 12, left: 0, right: 12),
+        padding: EdgeInsets.only(top: 0, left: 0, right: 12),
         child: Column(
           children: <Widget>[
             Padding(

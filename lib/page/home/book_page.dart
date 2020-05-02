@@ -183,7 +183,7 @@ class _HomePage extends State<BookPage>
       child: Scaffold(
         body: Container(
           color: Colors.white,
-          padding: EdgeInsets.only(top:12,left: 12,right: 12),
+          padding: EdgeInsets.only(top:0,left: 12,right: 12),
           child: Column(
             children: <Widget>[
               DReaderTabView(
