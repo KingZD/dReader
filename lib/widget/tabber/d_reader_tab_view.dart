@@ -9,7 +9,6 @@ import 'dart:math';
 
 import 'package:dreader/common/style/d_reader_style.dart';
 import 'package:dreader/widget/tabber/d_reader_tab.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 enum ScrollDirect {
@@ -28,9 +27,26 @@ enum ScrollDirect {
  * Date: 2020/4/23 11:37
  * Description: 书城
  */
-class DReaderTabView extends StatefulWidget {
 
-  const DReaderTabView({Key key}) : super(key: key);
+class DReaderTabView extends StatelessWidget {
+  final List<String> tabs;
+
+  const DReaderTabView({
+    Key key,
+    @required this.tabs,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DReaderTabViewInheritedWidget(
+      child: _DReaderTabWidget(),
+      tabs: tabs,
+    );
+  }
+}
+
+class _DReaderTabWidget extends StatefulWidget {
+  const _DReaderTabWidget({Key key}) : super(key: key);
 
   @override
   _DReaderTabView createState() {
@@ -38,10 +54,10 @@ class DReaderTabView extends StatefulWidget {
   }
 }
 
-class _DReaderTabView extends State<DReaderTabView>
-    with TickerProviderStateMixin,AutomaticKeepAliveClientMixin{
+class _DReaderTabView extends State<_DReaderTabWidget>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   ///默认的tab宽度
-  final _mDefaultTabWidth = 50.0;
+  final _mDefaultTabWidth = 60.0;
 
   ///默认的tab高度
   final _mDefaultTabHeight = 35.0;
@@ -288,8 +304,7 @@ class _DReaderTabView extends State<DReaderTabView>
     final needScrollOffset = mChildrenWidth - mRootViewWidth;
 
     ///过滤 mChildrenWidth 小于屏幕的时 不需要滚动效果
-    final mNeedScrollOffset =
-        needScrollOffset <= 0 ? 0 :  needScrollOffset;
+    final mNeedScrollOffset = needScrollOffset <= 0 ? 0 : needScrollOffset;
 
     if (mNeedScrollOffset > 0) {
       ///点击第一个tab 不需要滚动效果
@@ -325,8 +340,8 @@ class _DReaderTabView extends State<DReaderTabView>
 
     /// 如果手动滑动到顶端 或者 手动滑动到尾部 在点击tab，
     /// 由于位移距离相等 不会触发滚动监听，导致tabScroll状态无法刷新，控件触摸事件被抢占
-    if (_mScrollWidth == 0 && _mTabIndex != 0  || _mScrollWidth == _scrollController.offset)
-      _refreshTapScroll();
+    if (_mScrollWidth == 0 && _mTabIndex != 0 ||
+        _mScrollWidth == _scrollController.offset) _refreshTapScroll();
   }
 
   ///tab底线  @show 是否显示  默认显示
@@ -448,7 +463,6 @@ class _DReaderTabView extends State<DReaderTabView>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
 

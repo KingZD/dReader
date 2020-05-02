@@ -8,41 +8,63 @@ class DReaderHomeBook extends StatelessWidget {
   const DReaderHomeBook({Key key, this.scene}) : super(key: key);
 
   buildRow() {
-    return Row(
-      children: <Widget>[
-        DImage(
-          width: 90,
-          imageUrl: scene.book.icon,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                scene.book.title,
-                textAlign: TextAlign.start,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                scene.book.desc,
-                style: TextStyle(fontSize: 16),
-                maxLines: 2,
-                textAlign: TextAlign.start,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(scene.book.author),
-                  ),
-                  Text(scene.book.type),
-                  Text("${scene.book.score}分"),
-                ],
-              ),
-            ],
+    return Container(
+      constraints: BoxConstraints(maxHeight: 120),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, //子组件的排列方式为主轴两端对齐
+        children: <Widget>[
+          Expanded(
+            child: DImage(
+              imageUrl: scene.book.icon,
+            ),
+            flex: 1,
           ),
-        )
-      ],
+          SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            flex: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      scene.book.title,
+                      textAlign: TextAlign.start,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      scene.book.desc,
+                      style: TextStyle(fontSize: 16),
+                      maxLines: 2,
+                      textAlign: TextAlign.start,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(scene.book.author),
+                    ),
+                    Text(scene.book.type),
+                    Text("${scene.book.score}分"),
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -51,6 +73,7 @@ class DReaderHomeBook extends StatelessWidget {
     bool showTitle = scene.showBookTitle ?? false;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         SizedBox(
           height: 10,

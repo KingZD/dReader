@@ -1,6 +1,7 @@
 import 'package:dreader/common/style/d_reader_style.dart';
 import 'package:dreader/common/utils/navigator_utils.dart';
 import 'package:dreader/page/home/book_page.dart';
+import 'package:dreader/page/type/type_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return WillPopScope(
       child: _HomePage(key: PageStorageKey(sName)),
       onWillPop: () {
@@ -25,7 +25,6 @@ class _HomePage extends StatefulWidget {
 
   @override
   _HomeState createState() {
-    // TODO: implement createState
     return _HomeState();
   }
 }
@@ -81,7 +80,7 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
         index: _currentTabIndex,
         children: <Widget>[
           BookPage(),
-          ListView(),
+          TypePage(),
           ListView(),
           ListView(),
         ],

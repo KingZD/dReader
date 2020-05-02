@@ -6,7 +6,6 @@ import 'package:dreader/page/home/d_home_book.dart';
 import 'package:dreader/page/home/d_home_recommend.dart';
 import 'package:dreader/page/home/d_reader_menu.dart';
 import 'package:dreader/widget/bookshop/d_reader_search_button.dart';
-import 'package:dreader/widget/d_imge.dart';
 import 'package:dreader/widget/d_reader_space_widget.dart';
 import 'package:dreader/widget/tabber/d_reader_tab_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -90,7 +89,7 @@ class _HomePage extends State<BookPage>
         "",
         "斗破苍穹（全集）",
         "http://cover.read.duokan.com/mfsv2/download/fdsc3/p010s07xjt4t/MmSF93H0dwqC1b.jpg!l",
-        "",
+        "斗破苍穹（全集）",
         "栗子",
         "10",
         "异世大陆"),
@@ -98,7 +97,7 @@ class _HomePage extends State<BookPage>
         "",
         "三千鸦杀",
         "http://cover.read.duokan.com/mfsv2/download/fdsc3/p01XuRsvWxIe/UvhKmMjZCmn5G6.jpg!l",
-        "",
+        "三千鸦杀",
         "清梦",
         "9.7",
         "宫斗"),
@@ -184,13 +183,13 @@ class _HomePage extends State<BookPage>
       child: Scaffold(
         body: Container(
           color: Colors.white,
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.only(top:12,left: 12,right: 12),
           child: Column(
             children: <Widget>[
-              DReaderTabViewInheritedWidget(
+              DReaderTabView(
                 tabs: _title,
-                child: DReaderTabView(),
               ),
+              SizedBox(height: 10,),
               Expanded(
                 child: PageView(
                   physics: BouncingScrollPhysics(),
