@@ -2,6 +2,7 @@ import 'package:dreader/common/style/d_reader_style.dart';
 import 'package:dreader/common/utils/navigator_utils.dart';
 import 'package:dreader/page/book/book_shelf_page.dart';
 import 'package:dreader/page/home/book_page.dart';
+import 'package:dreader/page/me/me_page.dart';
 import 'package:dreader/page/type/type_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,7 @@ class _HomeState extends State<_HomePage> with SingleTickerProviderStateMixin {
           BookPage(),
           TypePage(),
           BookShelfPage(),
-          ListView(),
+          MePage(),
         ],
       ),
       bottomNavigationBar: CupertinoTabBar(
