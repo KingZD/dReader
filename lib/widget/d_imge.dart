@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dreader/common/config/config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,11 +39,22 @@ class DImage extends StatelessWidget {
     );
   }
 
+  nativeImage() {
+    if (imageUrl == null) return Container();
+    return Image.asset(
+      (imageUrl.lastIndexOf("/") <= 0 ? Config.IMAGE_PATH : "") + imageUrl,
+      width: width,
+      height: height,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return (borderRadius != null && borderRadius > 0)
         ? ClipRRect(
-            child: getImage(),
+            child: imageUrl != null && imageUrl.startsWith("http")
+                ? getImage()
+                : nativeImage(),
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)))
         : getImage();
   }

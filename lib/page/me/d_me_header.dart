@@ -1,7 +1,10 @@
 import 'package:dreader/common/style/d_reader_style.dart';
+import 'package:dreader/model/user.dart';
+import 'package:dreader/redux/d_reader_state.dart';
 import 'package:dreader/widget/d_imge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class DReaderMeHeader extends StatefulWidget {
   @override
@@ -11,6 +14,48 @@ class DReaderMeHeader extends StatefulWidget {
 }
 
 class _DReaderMeHeader extends State<DReaderMeHeader> {
+  _userLogin() {
+    return StoreConnector<DReaderState, User>(
+      builder: (BuildContext context, User userInfo) {
+        return Row(
+          children: <Widget>[
+            SizedBox(
+              width: 20,
+            ),
+            DImage(
+              imageUrl: (userInfo.isLogin())
+                  ? "https://pic3.zhimg.com/80/v2-472dd0a3c1c6ace9a992f2edca668cbf_1440w.jpg"
+                  : "personal__shared__avatar_middle.png",
+              width: 50,
+              height: 50,
+              borderRadius: 50,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              "${userInfo.userName ?? "请登录"}",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            (userInfo.isLogin())
+                ? IconButton(
+                    icon: Image.asset(
+                        "static/img/personal__main__header_account_view_edit_icon.png"),
+                    onPressed: () {},
+                  )
+                : SizedBox(),
+          ],
+        );
+      },
+      converter: (store) {
+        return store.state.userInfo;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -27,35 +72,7 @@ class _DReaderMeHeader extends State<DReaderMeHeader> {
               SizedBox(
                 height: 50,
               ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: 20,
-                  ),
-                  DImage(
-                    imageUrl:
-                        "https://pic3.zhimg.com/80/v2-472dd0a3c1c6ace9a992f2edca668cbf_1440w.jpg",
-                    width: 50,
-                    height: 50,
-                    borderRadius: 50,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    "龙的传人123",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  IconButton(
-                    icon: Image.asset(
-                        "static/img/personal__main__header_account_view_edit_icon.png"),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+              _userLogin(),
               Container(
                 height: 85,
                 padding: EdgeInsets.only(
@@ -161,13 +178,17 @@ class _DReaderMeHeader extends State<DReaderMeHeader> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Text("立即开通，万本好书免费读"),
-                        SizedBox(width: 5,),
+                        SizedBox(
+                          width: 5,
+                        ),
                         Image.asset(
                           "static/img/personal__main__header_vip_tip_exit_icon.png",
                           width: 10,
                           height: 10,
                         ),
-                        SizedBox(width: 20,)
+                        SizedBox(
+                          width: 20,
+                        )
                       ],
                     )
                   ],

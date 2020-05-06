@@ -1,7 +1,6 @@
 import 'package:dreader/common/localization/d_reader_localizations_delegate.dart';
 import 'package:dreader/common/style/d_reader_style.dart';
 import 'package:dreader/common/utils/common_utils.dart';
-import 'package:dreader/common/utils/navigator_utils.dart';
 import 'package:dreader/model/user.dart';
 import 'package:dreader/page/error_page.dart';
 import 'package:dreader/page/home_page.dart';

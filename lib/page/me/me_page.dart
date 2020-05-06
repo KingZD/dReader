@@ -42,11 +42,22 @@ class _MePage extends State<MePage> {
                 DReaderMenuWidget(
                   menus: _menu,
                 ),
-                DReaderLine(
-                  color: Colors.blue,
+                const DReaderLine(
+                  color: Color(0xFFC8E6C9),
+                  height: 1,
+                  left: 20,
+                  right: 20,
+                  top: 20,
                 ),
                 DReaderMeActivity(),
-                DReaderMeOperate()
+                const DReaderLine(
+                  color: Color(0xFFC8E6C9),
+                  height: 1,
+                  left: 20,
+                  right: 20,
+                  top: 20,
+                ),
+                DReaderMeOperate(),
               ],
             ),
           ),

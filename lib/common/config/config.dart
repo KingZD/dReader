@@ -6,6 +6,7 @@ class Config {
   static const PAGE_SIZE = 20;
 
   /// //////////////////////////////////////常量////////////////////////////////////// ///
+  static const IMAGE_PATH = "static/img/";
   static const TOKEN_KEY = "token";
   static const USER_NAME_KEY = "user-name";
   static const PW_KEY = "user-pw";

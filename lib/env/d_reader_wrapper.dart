@@ -6,7 +6,6 @@ class DReaderWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     ///设置 Config.DEBUG 的静态变量
 //    Config.DEBUG = this.common.config.debug;
 //    print("ConfigWrapper build ${Config.DEBUG}");
@@ -33,7 +32,6 @@ class _DReaderWrapper extends InheritedWidget {
 
   @override
   bool updateShouldNotify(_DReaderWrapper oldWidget) {
-    // TODO: implement updateShouldNotify
     return oldWidget.config != config;
   }
 

@@ -1,4 +1,4 @@
-import 'package:dreader/page/home/d_reader_menu.dart';
+import 'package:dreader/widget/d_reader_menu.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../model/book_shop_menu.dart';

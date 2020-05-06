@@ -16,4 +16,8 @@ class User {
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
   User.empty();
+
+  bool isLogin(){
+    return token != null;
+  }
 }
