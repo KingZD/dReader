@@ -5,6 +5,7 @@ import 'package:dreader/page/me/d_me_opreate.dart';
 import 'package:dreader/widget/d_line.dart';
 import 'package:dreader/widget/d_reader_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class MePage extends StatefulWidget {
@@ -25,6 +26,14 @@ class _MePage extends State<MePage> {
     BookShopMenu(
         "", "消息", "static/img/personal__main__user_info_message_icon.png"),
   ];
+
+  //获取到插件与原生的交互通道
+  static const jumpPlugin = const MethodChannel('DReader/FlutterPluginJumpNativePage');
+
+  nativeChannel() async{
+      String msg  = await jumpPlugin.invokeMethod("HHHH",{ "flutter": "这是一条来自flutter的参数" });
+      print(msg);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +78,10 @@ class _MePage extends State<MePage> {
               IconButton(
                 icon: Image.asset(
                     "static/img/personal__main__header_view_qr_login_icon.png"),
-                onPressed: () {},
+                onPressed: () async{
+                  String msg  = await jumpPlugin.invokeMethod("audio",{ "flutter": "这是一条来自flutter的参数" });
+                  print(msg);
+                },
               ),
               IconButton(
                 icon: Image.asset(
